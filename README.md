@@ -82,4 +82,4 @@ Este projeto é licenciado sob a licença MIT. Consulte o arquivo [LICENSE](LICE
 ### 📬 Contato
 
 Se tiver dúvidas ou sugestões, entre em contato:
-- **LinkedIn**: [Seu Perfil]([https://www.linkedin.com/in/seu-perfil/](https://www.linkedin.com/in/luanadesouza-desenvolvedora-android/))
+- **LinkedIn**: https://www.linkedin.com/in/seu-perfil/](https://www.linkedin.com/in/luanadesouza-desenvolvedora-android/
