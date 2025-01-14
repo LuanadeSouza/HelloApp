@@ -50,7 +50,7 @@ app/
 
 2. **Clone o repositório**:
    ```bash
-   git clone <link-do-repositorio>
+   git clone [(https://github.com/LuanadeSouza/HelloApp.git)]
    ```
 
 3. **Abra no Android Studio**:
@@ -82,5 +82,4 @@ Este projeto é licenciado sob a licença MIT. Consulte o arquivo [LICENSE](LICE
 ### 📬 Contato
 
 Se tiver dúvidas ou sugestões, entre em contato:
-- **E-mail**: seu-email@example.com
-- **LinkedIn**: [Seu Perfil](https://www.linkedin.com/in/seu-perfil/)
+- **LinkedIn**: [Seu Perfil]([https://www.linkedin.com/in/seu-perfil/](https://www.linkedin.com/in/luanadesouza-desenvolvedora-android/))
