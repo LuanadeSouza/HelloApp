@@ -1,4 +1,4 @@
-package br.com.alura.helloapp.ui.home
+package com.luanadev.ollaapp.ui.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

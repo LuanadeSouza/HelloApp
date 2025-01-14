@@ -7,17 +7,15 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.luanadev.ollaapp.FormularioContato
-import com.luanadev.ollaapp.R
 import com.luanadev.ollaapp.ui.form.FormularioContatoTela
-import com.luanadev.ollaapp.ui.form.FormularioContatoViewModel
 import com.luanadev.ollaapp.util.ID_CONTATO
+import com.luanadev.ollaapp.R
+import com.luanadev.ollaapp.ui.form.FormularioContatoViewModel
 import kotlinx.coroutines.launch
 
 fun NavGraphBuilder.formularioContatoGraph(
-    navController: NavHostController
+    onVolta: () -> Unit
 ) {
     composable(
         route = FormularioContato.rotaComArgumentos,
@@ -25,8 +23,7 @@ fun NavGraphBuilder.formularioContatoGraph(
     ) { navBackStackEntry ->
         navBackStackEntry.arguments?.getLong(
             ID_CONTATO
-        )?.let { idContato ->
-
+        )?.let {
             val viewModel = hiltViewModel<FormularioContatoViewModel>()
             val state by viewModel.uiState.collectAsState()
             val context = LocalContext.current
@@ -40,13 +37,13 @@ fun NavGraphBuilder.formularioContatoGraph(
 
             FormularioContatoTela(
                 state = state,
-                onClickSalvar = {
+                onClickSalva = {
                     coroutineScope.launch {
-                        viewModel.salvar()
+                        viewModel.salva()
                     }
-                    navController.popBackStack()
+                    onVolta()
                 },
-                onCarregarImagem = {
+                onCarregaImagem = {
                     viewModel.carregaImagem(it)
                 }
             )

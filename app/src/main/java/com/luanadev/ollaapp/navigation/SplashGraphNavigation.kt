@@ -10,15 +10,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.luanadev.ollaapp.DestinosHelloApp
-import com.luanadev.ollaapp.ui.navegaLimpo
 import com.luanadev.ollaapp.ui.splashscreen.AppState
 import com.luanadev.ollaapp.ui.splashscreen.SplashScreenViewModel
 
 fun NavGraphBuilder.splashGraph(
-    navController: NavHostController
+    onNavegaParaLogin: () -> Unit,
+    onNavegaParaHome: () -> Unit
 ) {
     composable(
         route = DestinosHelloApp.SplashScreen.rota
@@ -30,14 +29,16 @@ fun NavGraphBuilder.splashGraph(
             AppState.Carregando -> Box(Modifier.fillMaxSize()) {
                 CircularProgressIndicator(Modifier.align(Alignment.Center))
             }
+
             AppState.Deslogado -> {
                 LaunchedEffect(Unit) {
-                    navController.navegaLimpo(DestinosHelloApp.Login.rota)
+                    onNavegaParaLogin()
                 }
             }
+
             AppState.Logado -> {
                 LaunchedEffect(Unit) {
-                    navController.navegaLimpo(DestinosHelloApp.HomeGraph.rota)
+                    onNavegaParaHome()
                 }
             }
         }

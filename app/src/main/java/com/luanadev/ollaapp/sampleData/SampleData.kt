@@ -1,9 +1,9 @@
-package com.luanadev.ollaapp.sampleData
+package br.com.alura.helloapp.sampleData
 
 import com.luanadev.ollaapp.data.Contato
 import java.util.*
 
-var contatosExemplo: List<Contato> = listOf(
+val contatosExemplo: List<Contato> = listOf(
     Contato(
         nome = "Ana",
         sobrenome = "Clara",

@@ -12,15 +12,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,15 +31,13 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.luanadev.ollaapp.R
-import com.luanadev.ollaapp.ui.login.FormularioLoginUiState
 import com.luanadev.ollaapp.ui.theme.HelloAppTheme
-
 
 @Composable
 fun FormularioLoginTela(
     state: FormularioLoginUiState,
     modifier: Modifier = Modifier,
-    onSalvar: () -> Unit = {}
+    onSalva: () -> Unit = {}
 ) {
     Column(Modifier.fillMaxSize()) {
         Column(
@@ -52,7 +46,6 @@ fun FormularioLoginTela(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-
         ) {
             Image(
                 painter = painterResource(id = R.drawable.helloapp_logo_blue),
@@ -73,6 +66,7 @@ fun FormularioLoginTela(
                 .weight(2f),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+
             val focuAtual = LocalFocusManager.current
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
@@ -133,7 +127,7 @@ fun FormularioLoginTela(
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(56.dp),
-                onClick = onSalvar
+                onClick = onSalva
             ) {
                 Text(text = stringResource(R.string.criar))
             }

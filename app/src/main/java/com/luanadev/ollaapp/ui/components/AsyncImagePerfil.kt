@@ -11,7 +11,7 @@ import coil.request.ImageRequest
 import com.luanadev.ollaapp.R
 
 @Composable
-fun AsyncImagePerfil(urlImagem: String, modifier: Modifier = Modifier) {
+fun AsyncImagePerfil(modifier: Modifier = Modifier, urlImagem: String? = null) {
     AsyncImage(
         modifier = modifier,
         contentScale = ContentScale.Crop,

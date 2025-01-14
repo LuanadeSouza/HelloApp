@@ -9,11 +9,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -25,25 +28,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.luanadev.ollaapp.ui.components.AsyncImagePerfil
 import com.luanadev.ollaapp.R
 import com.luanadev.ollaapp.extensions.converteParaString
+import com.luanadev.ollaapp.ui.components.AsyncImagePerfil
 import com.luanadev.ollaapp.ui.theme.HelloAppTheme
 
 @Composable
 fun DetalhesContatoTela(
     state: DetalhesContatoUiState,
     modifier: Modifier = Modifier,
-    onClickVoltar: () -> Unit = {},
-    onClickEditar: () -> Unit = {},
+    onClickVolta: () -> Unit = {},
+    onClickEdita: () -> Unit = {},
     onApagaContato: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
             DetalhesContatoAppBar(
-                onClickVoltar = onClickVoltar,
+                onClickVoltar = onClickVolta,
                 onClickApagar = onApagaContato,
-                onClickEditar = onClickEditar
+                onClickEditar = onClickEdita
             )
         },
     ) { paddingValues ->
@@ -165,49 +168,46 @@ fun DetalhesContatoTela(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetalhesContatoAppBar(
     onClickVoltar: () -> Unit,
     onClickApagar: () -> Unit,
     onClickEditar: () -> Unit
 ) {
-//    TopAppBar {
-//        Row(
-//            Modifier.fillMaxWidth(),
-//            horizontalArrangement = Arrangement.SpaceBetween
-//        ) {
-//            IconButton(
-//                onClick = onClickVoltar
-//            ) {
-//                Icon(
-//                    Icons.Default.ArrowBack,
-//                    tint = Color.White,
-//                    contentDescription = stringResource(R.string.voltar)
-//                )
-//            }
-//
-//            Row {
-//                IconButton(
-//                    onClick = onClickEditar
-//                ) {
-//                    Icon(
-//                        Icons.Default.Edit,
-//                        tint = Color.White,
-//                        contentDescription = stringResource(R.string.editar)
-//                    )
-//                }
-//
-//                IconButton(onClick = { onClickApagar() }) {
-//                    Icon(
-//                        Icons.Default.Delete,
-//                        tint = Color.White,
-//                        contentDescription = stringResource(R.string.deletar)
-//                    )
-//                }
-//            }
-//        }
-//    }
+    Row(
+        Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        IconButton(
+            onClick = onClickVoltar
+        ) {
+            Icon(
+                Icons.Default.ArrowBack,
+                tint = Color.White,
+                contentDescription = stringResource(R.string.voltar)
+            )
+        }
+
+        Row {
+            IconButton(
+                onClick = onClickEditar
+            ) {
+                Icon(
+                    Icons.Default.Edit,
+                    tint = Color.White,
+                    contentDescription = stringResource(R.string.editar)
+                )
+            }
+
+            IconButton(onClick = { onClickApagar() }) {
+                Icon(
+                    Icons.Default.Delete,
+                    tint = Color.White,
+                    contentDescription = stringResource(R.string.deletar)
+                )
+            }
+        }
+    }
 }
 
 

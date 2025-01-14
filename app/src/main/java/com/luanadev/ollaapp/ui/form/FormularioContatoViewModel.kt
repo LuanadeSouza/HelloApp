@@ -1,13 +1,16 @@
 package com.luanadev.ollaapp.ui.form
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.luanadev.ollaapp.R
 import com.luanadev.ollaapp.data.Contato
 import com.luanadev.ollaapp.database.ContatoDao
 import com.luanadev.ollaapp.extensions.converteParaDate
 import com.luanadev.ollaapp.extensions.converteParaString
+import br.com.alura.helloapp.preferences.PreferencesKey
+import com.luanadev.ollaapp.R
 import com.luanadev.ollaapp.util.ID_CONTATO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -17,7 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class FormularioContatoViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val contatoDao: ContatoDao
+    private val contatoDao: ContatoDao,
+    private val dataStore: DataStore<Preferences>
 ) : ViewModel() {
 
     private val idContato = savedStateHandle.get<Long>(ID_CONTATO)
@@ -25,7 +29,6 @@ class FormularioContatoViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(FormularioContatoUiState())
     val uiState: StateFlow<FormularioContatoUiState>
         get() = _uiState.asStateFlow()
-
 
     init {
         viewModelScope.launch {
@@ -78,7 +81,7 @@ class FormularioContatoViewModel @Inject constructor(
                             aniversario = aniversario,
                             telefone = telefone,
                             fotoPerfil = fotoPerfil,
-                            tituloAppbar = R.string.titulo_editar_contato
+                            tituloAppbar = R.string.titulo_editar_contato,
                         )
                     }
                 }
@@ -100,18 +103,23 @@ class FormularioContatoViewModel @Inject constructor(
         )
     }
 
-    suspend fun salvar() {
-        with(_uiState.value) {
-            contatoDao.insere(
-                Contato(
-                    id = id,
-                    nome = nome,
-                    sobrenome = sobrenome,
-                    telefone = telefone,
-                    fotoPerfil = fotoPerfil,
-                    aniversario = aniversario
+    suspend fun salva() {
+        dataStore.data.first()[PreferencesKey.USUARIO_ATUAL]?.let {
+
+
+            with(_uiState.value) {
+                contatoDao.insere(
+                    Contato(
+                        id = id,
+                        nome = nome,
+                        sobrenome = sobrenome,
+                        telefone = telefone,
+                        fotoPerfil = fotoPerfil,
+                        aniversario = aniversario,
+                        idUsuario = it
+                    )
                 )
-            )
+            }
         }
     }
 }

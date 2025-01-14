@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -118,10 +119,49 @@ fun CaixaDialogoImagem(
     )
 }
 
+@Composable
+fun CaixaDialogoConfirmacao(
+    titulo: String,
+    mensagem: String,
+    onClikConfirma: () -> Unit = {},
+    onClickCancela: () -> Unit = {}
+) {
+    AlertDialog(
+        title = {
+            Text(text = titulo)
+        },
+        text = {
+            Text(text = mensagem)
+        },
+        onDismissRequest = onClickCancela,
+        confirmButton = {
+            TextButton(onClikConfirma) {
+                Text(text = stringResource(id = R.string.confirmar))
+            }
+        },
+        dismissButton = {
+            TextButton(onClickCancela) {
+                Text(text = stringResource(id = R.string.cancelar))
+            }
+        }
+    )
+}
+
 @Preview
 @Composable
 fun CaixaDialogoImagemPreview() {
     HelloAppTheme {
         CaixaDialogoImagem("")
+    }
+}
+
+@Preview
+@Composable
+fun CaixaDialogoConfirmacaoPreview() {
+    HelloAppTheme {
+        CaixaDialogoConfirmacao(
+            titulo = stringResource(R.string.tem_certeza),
+            mensagem = stringResource(R.string.aviso_apagar_usuario),
+        )
     }
 }

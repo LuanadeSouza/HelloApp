@@ -56,8 +56,8 @@ import com.luanadev.ollaapp.ui.theme.HelloAppTheme
 fun FormularioContatoTela(
     state: FormularioContatoUiState,
     modifier: Modifier = Modifier,
-    onClickSalvar: () -> Unit = {},
-    onCarregarImagem: (String) -> Unit = {}
+    onClickSalva: () -> Unit = {},
+    onCarregaImagem: (String) -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -65,9 +65,7 @@ fun FormularioContatoTela(
                 FormularioContatoAppBar(stringResource(id = titulo))
             }
         },
-
-        ) { paddingValues ->
-
+    ) { paddingValues ->
         Column(
             modifier
                 .padding(paddingValues)
@@ -96,7 +94,7 @@ fun FormularioContatoTela(
                 )
                 Text(
                     text = stringResource(R.string.adicionar_foto),
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleMedium
                 )
             }
             Column(
@@ -174,7 +172,7 @@ fun FormularioContatoTela(
                     modifier = Modifier
                         .fillMaxWidth()
                         .heightIn(56.dp),
-                    onClick = onClickSalvar
+                    onClick = onClickSalva
                 ) {
                     Text(text = stringResource(R.string.salvar))
                 }
@@ -185,7 +183,7 @@ fun FormularioContatoTela(
                     state.fotoPerfil,
                     onFotoPerfilMudou = state.onFotoPerfilMudou,
                     onClickDispensar = { state.onMostrarCaixaDialogoImagem(false) },
-                    onClickSalvar = { onCarregarImagem(it) }
+                    onClickSalvar = { onCarregaImagem(it) }
                 )
             }
 

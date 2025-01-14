@@ -1,10 +1,8 @@
 package com.luanadev.ollaapp.ui.login
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
-import com.luanadev.ollaapp.preferences.PreferencesKey
+import com.luanadev.ollaapp.data.Usuario
+import com.luanadev.ollaapp.database.UsuarioDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FormularioLoginViewModel @Inject constructor(
-    private val dataStore: DataStore<Preferences>
+    private val usuarioDao: UsuarioDao
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(FormularioLoginUiState())
@@ -38,17 +36,20 @@ class FormularioLoginViewModel @Inject constructor(
                     _uiState.value = _uiState.value.copy(
                         senha = it
                     )
-                },
+                }
             )
         }
     }
 
-    suspend fun salvarLogin() {
-        dataStore.edit { preferences ->
-            preferences[PreferencesKey.USUARIO] =
-                _uiState.value.usuario
-            preferences[PreferencesKey.SENHA] =
-                _uiState.value.senha
+    suspend fun salvaLogin() {
+        with(_uiState.value) {
+            usuarioDao.insere(
+                Usuario(
+                    idUsuario = usuario,
+                    senha = senha,
+                    nome = nome
+                )
+            )
         }
     }
 }

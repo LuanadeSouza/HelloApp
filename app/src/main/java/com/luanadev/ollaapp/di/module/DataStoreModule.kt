@@ -3,7 +3,7 @@ package com.luanadev.ollaapp.di.module
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import com.luanadev.ollaapp.preferences.dataStore
+import br.com.alura.helloapp.preferences.dataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +15,7 @@ import dagger.hilt.components.SingletonComponent
 class DataStoreModule {
 
     @Provides
-    fun provideDatStore(@ApplicationContext context: Context): DataStore<Preferences>{
+    fun provideDatStore(@ApplicationContext context: Context): DataStore<Preferences> {
         return context.dataStore
     }
 }
